@@ -209,7 +209,7 @@ class Payments extends Component
     public function render()
     {
     
-        $deposits = $this->selectedCustomer ? Receive::where('customer_id', $this->selectedCustomer)->orderBy('created_at','desc')->paginate(6) : collect([]);
+        $deposits = $this->selectedCustomer ? Receive::where('customer_id', $this->selectedCustomer)->orderBy('created_at','desc')->get() : collect([]);
        $payments=Payment::all();
         return view('livewire.pages.payments',['payments' => $payments , 'deposits' => $deposits]);
     }

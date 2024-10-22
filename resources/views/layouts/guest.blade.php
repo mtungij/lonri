@@ -16,10 +16,9 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class=" items-center justify-center px-6 pt-8 mx-6 mt-5 pt:mt-0 dark:bg-gray-900">
-            
-
+    <body  class="bg-gray-900 min-h-screen flex items-center justify-center  antialiased">
+       
+    <div class="w-full" style="background-image: url('{{ asset('assets/back1.jpg') }}'); background-size: cover; background-position: center;">
             <div>
                 {{ $slot }}
             </div>

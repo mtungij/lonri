@@ -12,6 +12,7 @@ use App\Livewire\Pages\Members\Withdrawals;
 use App\Livewire\Pages\Payments\Method;
 use App\Livewire\Pages\Permission\UserPermission;
 use App\Livewire\Pages\Roles\Roles;
+use App\Livewire\Pages\Settings;
 use Illuminate\Support\Facades\Route;
 
 
@@ -27,58 +28,66 @@ Route::view('profile', 'profile')
 
 Route::resource('users', UserController::class);
 
-Route::get('users',Admins::class)
-->middleware(['auth',Admins::class])
-->name('users');
+Route::get('users', Admins::class)
+    ->middleware(['auth', Admins::class])
+    ->name('users');
 
 
-Route::get('users',UsersCreate::class)
-->middleware(['auth',UsersCreate::class])
-->name('usersCreate');
-    
-    Route::get('members', Member::class)
+Route::get('users', UsersCreate::class)
+    ->middleware(['auth', UsersCreate::class])
+    ->name('usersCreate');
+
+Route::get('members', Member::class)
     ->middleware(['auth', Member::class])
     ->name('members');
 
-    Route::get('payments', Payments::class)
+Route::get('payments', Payments::class)
     ->middleware(['auth', payments::class])
     ->name('payments');
 
 
-    Route::get('method', Method::class)
+Route::get('method', Method::class)
     ->middleware(['auth', Method::class])
     ->name('method');
 
-Route::get('TodayDeposit',Deposits::class)
-->middleware(['auth',Deposits::class])
-->name('TodayDeposit');    
+Route::get('TodayDeposit', Deposits::class)
+    ->middleware(['auth', Deposits::class])
+    ->name('TodayDeposit');
 
 
-Route::get('TodayWithdrawals',Withdrawals::class)
-->middleware(['auth',Withdrawals::class])
-->name('TodayWithdrawals');
+Route::get('TodayWithdrawals', Withdrawals::class)
+    ->middleware(['auth', Withdrawals::class])
+    ->name('TodayWithdrawals');
 
 Route::get('debts', Debts::class)
-->middleware(['auth',Debts::class])
-->name('debts');
+    ->middleware(['auth', Debts::class])
+    ->name('debts');
 
-Route::get('permission',UserPermission::class)
-->middleware(['auth',UserPermission::class])
-->name('permission');
-
-
-Route::get('roles',Roles::class)
-->middleware(['auth',Roles::class])
-->name('roles');
+Route::get('permission', UserPermission::class)
+    ->middleware(['auth', UserPermission::class])
+    ->name('permission');
 
 
+Route::get('roles', Roles::class)
+    ->middleware(['auth', Roles::class])
+    ->name('roles');
+
+Route::get('settings', Settings::class)
+    ->middleware(['auth', Settings::class])
+    ->name('settings');
+
+Route::get('save', Settings::class)
+    ->middleware(['auth', Settings::class])
+    ->name('save');
 
 
-    Route::get('admins', Admins::class)
+
+
+Route::get('admins', Admins::class)
     ->middleware(['auth', Admins::class])
     ->name('admins');
-        
-    
 
-   
-require __DIR__.'/auth.php';
+
+
+
+require __DIR__ . '/auth.php';
