@@ -94,7 +94,7 @@ class Payments extends Component
    
 
     $date = now()->format('d-m-Y H:i:s');
-    $message = "Ahsante Ndugu {$this->currentCustomer->fname} Mchango wako wa Tsh {$this->deposit} umepokelewa Lonri Financial Group leo {$date} kwa maelezo zaidi 0683250019";
+    $message = "Ahsante Ndugu {$this->currentCustomer->fname} Mchango wako wa Tsh {$this->deposit} umepokelewa Chawote Group leo {$date} kwa maelezo zaidi 0683250019";
     $phone = $this->currentCustomer->phone; 
 
     $this->sendsms($phone, $message);
@@ -143,7 +143,7 @@ class Payments extends Component
         ]);
 
         $date= date('d-m-Y');
-        $message = "Ndugu {$this->currentCustomer->fname}  {$date} umechukua  Tsh ". number_format($this->withdrawal)." Kwa maelezo zaidi +255683250019 Lonri Financial Group  .";
+        $message = "Ndugu {$this->currentCustomer->fname}  {$date} umetoa  Tsh ". number_format($this->withdrawal)." Chawote Group Kwa maelezo zaidi +255683250019  .";
         $phone = $this->currentCustomer->phone; 
         $this->sendsms($phone,$message);
 

@@ -67,7 +67,8 @@ class Member extends Component
 
         Customer::create($validated);
       $this->reset('fname','nickname','phone','gender','img');
-        Toaster::success('Umefanikiwa kumsajili!' .$validated['fname']. ' '); // 👈
+      notify()->success('Operation completed successfully!');
+
     }
 public function changeDelete($memberid)
 {
