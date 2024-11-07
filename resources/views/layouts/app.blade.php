@@ -45,7 +45,7 @@
 </head>
 
 <body class="font-sans antialiased dark:bg-gray-900">
-@include('notify::components.notify')
+
     <div class="bg-gray-100 dark:bg-gray-900">
         <livewire:layout.navigation />
         <livewire:layout.sidebar/>
@@ -68,7 +68,7 @@
     </div>
 
     <x-toaster-hub />
-    @notifyJs
+   
 
     <!-- Initialize Select2 and handle Livewire updates -->
     <script>
