@@ -69,7 +69,7 @@ class Member extends Component
 
         Customer::create($validated);
       $this->reset('fname','nickname','phone','gender','img');
-      notify()->success('Operation completed successfully!');
+      Toaster::success('registered completed successfully!');
 
    
 
