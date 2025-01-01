@@ -29,6 +29,8 @@ class Member extends Component
     public $search;
 
    
+
+   
     public $selectuserID = 0;
 
     protected $rules = [
@@ -68,6 +70,11 @@ class Member extends Component
         Customer::create($validated);
       $this->reset('fname','nickname','phone','gender','img');
       notify()->success('Operation completed successfully!');
+
+   
+
+      $message = "Mpendwa {$validated['fname']},chawote Tunafurahi kukuona ukiwa sehemu ya familia yetu. Karibu tufanikishe zaidi pamoja! 🙌";
+      $this->sendsms($validated['phone'], $message);
 
     }
 public function changeDelete($memberid)
@@ -141,7 +148,25 @@ public function DownloadX()
 }
 
 
+public function sendsms($phone, $message)
+{
+    $api_key = 'Kad9LxbWcMWzoSUZrYeiu8v5uM'; // Your API key
 
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://galadove.loan-pocket.com//api/v1/receive/action/send/sms");
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+        'apiKey' => $api_key,
+        'phoneNumber' => $phone,
+        'messageContent' => $message
+    ]));
+
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $server_output = curl_exec($ch);
+    curl_close($ch);
+
+    return $server_output;
+}
 
 
 

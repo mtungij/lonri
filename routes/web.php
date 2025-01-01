@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Livewire\Massages;
 use App\Livewire\Members;
 use App\Livewire\Pages\Admins\Admins;
 use App\Livewire\Pages\Admins\UsersCreate;
@@ -79,6 +80,9 @@ Route::get('settings', Settings::class)
 Route::get('save', Settings::class)
     ->middleware(['auth', Settings::class])
     ->name('save');
+Route::get('GroupSms', Massages::class)
+    ->middleware(['auth', Massages::class])
+    ->name('GroupSms');
 
 
 
