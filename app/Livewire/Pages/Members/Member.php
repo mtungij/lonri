@@ -73,7 +73,7 @@ class Member extends Component
 
    
 
-      $message = "Mpendwa {$validated['fname']},karibu CHAWATOTE GROUP Tunafurahi kukuona ukiwa sehemu ya familia yetu.🙌";
+      $message = "Mpendwa {$validated['fname']},karibu CHAWOTE GROUP Tunafurahi kukuona ukiwa sehemu ya familia yetu.🙌";
       $this->sendsms($validated['phone'], $message);
 
     }
