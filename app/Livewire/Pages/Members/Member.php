@@ -42,41 +42,44 @@ class Member extends Component
         'gender' => 'required',
     ];
 
-    public function save()
-    {
+ public function save()
+{
+    // Validate input
+    $validated = $this->validate([
+        'fname'    => 'required|string|max:255',
+        'nickname' => 'required|string|max:255',
+        'phone'    => 'required|numeric',
+        'gender'   => 'required|string',
+        'img'      => 'nullable|image|max:1024', // optional, max 1MB
+    ]);
 
-        sleep(2);
-
-
-        $validated = $this->validate();
-
-        $existedMember = Customer::where('fname', $validated['fname'])
-                    
-                                 ->first();
-
-        if ($existedMember) {
-            Toaster::error('Mteja ' . $validated['fname'] . ' Hawezi kusajiliwa tena tayari yupo kwenye mfumo!'); // 👈
-            return redirect()->back();
-        }
-
-        if (isset($this->img)) {
-          
-            $filePath = $this->img->store('passports', 'public');
-    
-           
-            $validated['img'] = $filePath; 
-        }
-
-        Customer::create($validated);
-      $this->reset('fname','nickname','phone','gender','img');
-      Toaster::success('registered completed successfully!');
-
-   
-
-      $message = "Mpendwa {$validated['fname']},karibu CHAWOTE GROUP Tunafurahi kukuona ukiwa sehemu ya familia yetu.🙌";
-      $this->sendsms($validated['phone'], $message);
-
+    // Check if member already exists
+    $existedMember = Customer::where('fname', $validated['fname'])->first();
+    if ($existedMember) {
+        Toaster::error("Mteja {$validated['fname']} hawezi kusajiliwa tena, tayari yupo kwenye mfumo!");
+        return;
     }
+
+    // Handle file upload if image exists
+    if ($this->img) {
+        $filePath = $this->img->store('passports', 'public');
+        $validated['img'] = $filePath;
+    }
+
+    // Create the member
+    Customer::create($validated);
+
+    // Reset form fields
+    $this->reset(['fname', 'nickname', 'phone', 'gender', 'img']);
+
+    // Show success message
+    Toaster::success('Registration completed successfully!');
+
+    // Send welcome SMS
+    $message = "Mpendwa {$validated['fname']}, karibu CHAWOTE GROUP. Tunafurahi kukuona ukiwa sehemu ya familia yetu. 🙌";
+    $this->sendsms($validated['phone'], $message);
+}
+
 public function changeDelete($memberid)
 {
       $this->selectuserID=$memberid;
