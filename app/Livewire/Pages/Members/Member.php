@@ -198,3 +198,9 @@ public function DownloadX()
         return view('livewire.pages.member', ['members' => $members]);
     }
 }
+
+
+
+
+
+
