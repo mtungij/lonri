@@ -41,7 +41,7 @@ new #[Layout('layouts.guest')] class extends Component
                 <div>
                     <label for="email" class="mb-2 block text-sm font-medium text-white">Email address</label>
                     <input type="email" wire:model="form.email" name="email" id="email"
-                        class="block w-full rounded-xl border border-cyan-500/40 bg-black/45 p-3 text-white outline-none placeholder:text-white/55 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400"
+                        class="block w-full rounded-xl border border-cyan-500/40 bg-black/45 p-3 text-black outline-none placeholder:text-white/55 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400"
                         placeholder="you@example.com" required />
                     <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
                 </div>
