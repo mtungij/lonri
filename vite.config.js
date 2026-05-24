@@ -25,8 +25,8 @@ export default defineConfig({
             registerType: 'autoUpdate',
             injectRegister: 'auto',
             includeAssets: [
-                'assets/lonri.png',
-                'assets/admin.png',
+                'pwa/icon-192.png',
+                'pwa/icon-512.png',
             ],
             manifest: {
                 name: 'Lonri',
@@ -41,16 +41,16 @@ export default defineConfig({
                 lang: 'en',
                 icons: [
                     {
-                        src: '/assets/lonri.png',
+                        src: '/pwa/icon-192.png',
                         sizes: '192x192',
                         type: 'image/png',
-                        purpose: 'any maskable',
+                        purpose: 'any',
                     },
                     {
-                        src: '/assets/lonri.png',
+                        src: '/pwa/icon-512.png',
                         sizes: '512x512',
                         type: 'image/png',
-                        purpose: 'any maskable',
+                        purpose: 'any',
                     },
                 ],
             },

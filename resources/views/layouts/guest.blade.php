@@ -8,7 +8,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="default">
         <meta name="apple-mobile-web-app-title" content="Lonri">
-        <link rel="manifest" href="/manifest.webmanifest">
+        <link rel="manifest" href="{{ asset('build/manifest.webmanifest') }}">
         <link rel="apple-touch-icon" href="{{ asset('assets/lonri.png') }}">
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
