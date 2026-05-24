@@ -137,34 +137,51 @@
     <script>
         let deferredPrompt = null;
         const installButton = document.getElementById('installAppButton');
+        const isIos = /iphone|ipad|ipod/i.test(window.navigator.userAgent);
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
 
         window.addEventListener('beforeinstallprompt', (event) => {
             event.preventDefault();
             deferredPrompt = event;
-            if (installButton) {
-                installButton.classList.remove('hidden');
-            }
         });
 
         if (installButton) {
             installButton.addEventListener('click', async () => {
                 if (!deferredPrompt) {
+                    if (isStandalone) {
+                        alert('App is already installed.');
+                        return;
+                    }
+
+                    if (isIos) {
+                        alert('To install on iPhone: tap Share, then choose Add to Home Screen.');
+                        return;
+                    }
+
+                    alert('Install prompt is not available yet. Use HTTPS and open this app in Chrome/Edge, then try again.');
                     return;
                 }
 
                 deferredPrompt.prompt();
                 await deferredPrompt.userChoice;
                 deferredPrompt = null;
-                installButton.classList.add('hidden');
             });
         }
 
         window.addEventListener('appinstalled', () => {
             deferredPrompt = null;
             if (installButton) {
-                installButton.classList.add('hidden');
+                installButton.textContent = 'Installed';
+                installButton.disabled = true;
+                installButton.classList.add('opacity-70', 'cursor-not-allowed');
             }
         });
+
+        if (installButton && isStandalone) {
+            installButton.textContent = 'Installed';
+            installButton.disabled = true;
+            installButton.classList.add('opacity-70', 'cursor-not-allowed');
+        }
     </script>
 </body>
 
