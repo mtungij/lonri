@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="theme-color" content="#0284c7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Lonri">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="apple-touch-icon" href="{{ asset('assets/lonri.png') }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -114,6 +120,10 @@
     </div>
 
     <x-toaster-hub />
+
+    <button id="installAppButton" type="button" class="hidden fixed bottom-6 right-6 z-50 rounded-full bg-cyan-600 px-4 py-2 text-sm font-semibold text-white shadow-lg hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-300">
+        Install App
+    </button>
    
 
     <!-- Initialize Select2 and handle Livewire updates -->
@@ -126,6 +136,39 @@
             Livewire.hook('message.processed', (message, component) => {
                 $('.select2').select2();
             });
+        });
+    </script>
+
+    <script>
+        let deferredPrompt = null;
+        const installButton = document.getElementById('installAppButton');
+
+        window.addEventListener('beforeinstallprompt', (event) => {
+            event.preventDefault();
+            deferredPrompt = event;
+            if (installButton) {
+                installButton.classList.remove('hidden');
+            }
+        });
+
+        if (installButton) {
+            installButton.addEventListener('click', async () => {
+                if (!deferredPrompt) {
+                    return;
+                }
+
+                deferredPrompt.prompt();
+                await deferredPrompt.userChoice;
+                deferredPrompt = null;
+                installButton.classList.add('hidden');
+            });
+        }
+
+        window.addEventListener('appinstalled', () => {
+            deferredPrompt = null;
+            if (installButton) {
+                installButton.classList.add('hidden');
+            }
         });
     </script>
 </body>

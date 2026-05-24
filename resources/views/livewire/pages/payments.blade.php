@@ -12,7 +12,8 @@
             </div>
             <div>
                 <h3 class="text-xl relative font-bold leading-6 dark:text-white uppercase"> {{ $currentCustomer ? $currentCustomer->nickname : '' }}</h3>
-                <p class="text-sm  text-gray-400"> {{ $currentCustomer ? $currentCustomer->fname : '' }}</p>
+                <p  class="px-2 py-2 font-medium  text-gray-900 whitespace-nowrap dark:text-white"> {{ $currentCustomer ? $currentCustomer->fname : '' }}</p>
+                <p  class="px-2 py-2 font-medium  text-gray-900 whitespace-nowrap dark:text-white"> {{  $currentCustomer ? $currentCustomer->phone : '******' }}</p>
             </div>
         
     <!-- Payment Deposit Component -->
@@ -25,50 +26,7 @@
 
     </div>
 
-    <div class="relative overflow-x-auto mt-4">
-    <table class="w-full  bg-green-400 hover:bg-green-800 focus:ring-4 border-b border-gray-200 shadow focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:text-white dark:bg-green-400 dark:hover:bg-green-300 focus:outline-none dark:focus:ring-blue-800 uppercase">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Namba Ya Simu
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Last Payment
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Lipwa
-                </th>
-                <th scope="col" class="px-6 py-3">
-                   Tolewa
-                </th>
-                 <th scope="col" class="px-6 py-3">
-                   Salio 
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-        
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th scope="row" class="px-2 py-2 font-medium  text-gray-900 whitespace-nowrap dark:text-white">
-                   {{$currentCustomer ? $currentCustomer->phone : '******' }}
-                </th>
-               <td class="px-6 py-4 dark:text-white whitespace-nowrap">
-                  -----
-             </td>
-
-                <td class="px-6 py-4 dark:text-white">
-                    00.00
-                </td>
-                <td class="px-6 py-4 dark:text-white">
-                    00.00
-                </td>
-                  <td class="px-6 py-4 dark:text-white">
-                   00.00
-                </td>
-            </tr>
-          
-        </tbody>
-    </table>
-</div>
+  
 
   <form wire:submit.prevent="selectCustomer" class="w-full mb-8">
     <div  wire:ignore>
@@ -86,6 +44,13 @@
 
 
 @if($selectedCustomer)
+<div class="mt-2 mb-3 flex justify-end">
+    <button type="button"
+        wire:click="downloadDepositsPdf"
+        class="inline-flex items-center rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400">
+        Download PDF
+    </button>
+</div>
 <div class="relative overflow-x-auto mt-4">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 

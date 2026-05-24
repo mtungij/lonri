@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Members;
 use App\Models\Customer;
 use App\Models\Payment;
 use App\Models\Receive;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Masmerise\Toaster\Toaster;
@@ -208,6 +209,37 @@ class Payments extends Component
             $this->dispatch('customer-changed');
 
         } 
+    }
+
+    public function downloadDepositsPdf()
+    {
+        if (!$this->selectedCustomer) {
+            Toaster::error('Chagua mwanachama kwanza ili kupakua PDF.');
+            return;
+        }
+
+        $customer = Customer::find($this->selectedCustomer);
+
+        if (!$customer) {
+            Toaster::error('Mwanachama hapatikani.');
+            return;
+        }
+
+        $deposits = Receive::where('customer_id', $this->selectedCustomer)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $pdf = Pdf::loadView('pdf.deposits', [
+            'customer' => $customer,
+            'deposits' => $deposits,
+        ])->setPaper('A4', 'portrait');
+
+        $safeName = preg_replace('/[^A-Za-z0-9_-]/', '-', (string) ($customer->nickname ?: $customer->fname));
+        $filename = 'deposits-' . trim($safeName, '-') . '-' . now()->format('YmdHis') . '.pdf';
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->output();
+        }, $filename);
     }
 
 

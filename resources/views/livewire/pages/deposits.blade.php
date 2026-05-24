@@ -19,12 +19,28 @@
 
                    <!-- Date Range Filter -->
                    <div class="w-full md:w-1/2 flex space-x-4">
-                       <input type="date" wire:model="startDate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
-                       <input type="date" wire:model="endDate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                       <input type="date" wire:model.live="startDate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                       <input type="date" wire:model.live="endDate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
                    </div>
                </div>
 
                <div class="overflow-x-auto">
+                   @php
+                       $exportCount = $this->exportCount;
+                       $maxExportRows = $this->maxExportRows;
+                       $canDownloadPdf = $exportCount > 0 && $exportCount <= $maxExportRows;
+                   @endphp
+                   <div class="px-4 pt-2 pb-3 flex flex-col gap-2 md:flex-row md:items-center md:justify-end">
+                       <span class="text-xs text-gray-600 dark:text-gray-300">
+                           Records: {{ number_format($exportCount) }} / {{ number_format($maxExportRows) }} max for PDF
+                       </span>
+                       <button type="button"
+                           wire:click="downloadDepositsPdf"
+                           @disabled(!$canDownloadPdf)
+                           class="inline-flex items-center rounded-lg px-4 py-2 text-sm font-semibold text-white focus:outline-none focus:ring-2 {{ $canDownloadPdf ? 'bg-red-600 hover:bg-red-700 focus:ring-red-400' : 'bg-gray-400 cursor-not-allowed focus:ring-gray-300' }}">
+                           Download PDF
+                       </button>
+                   </div>
                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-white">
                            <tr>

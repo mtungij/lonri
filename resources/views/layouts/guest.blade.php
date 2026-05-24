@@ -4,6 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+        <meta name="theme-color" content="#0284c7">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="apple-mobile-web-app-title" content="Lonri">
+        <link rel="manifest" href="/manifest.webmanifest">
+        <link rel="apple-touch-icon" href="{{ asset('assets/lonri.png') }}">
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -18,7 +24,7 @@
     </head>
     <body  class="bg-gray-900 min-h-screen flex items-center justify-center  antialiased">
        
-    <div class="w-full" style="background-image: url('{{ asset('assets/back1.jpg') }}'); background-size: cover; background-position: center;">
+    <div class="w-full" style="background-image: url('{{ asset('assets/lonri1.png') }}'); background-size: cover; background-position: center;">
             <div>
                 {{ $slot }}
             </div>
