@@ -121,11 +121,6 @@
 
     <x-toaster-hub />
 
-    <button id="installAppButton" type="button" class="hidden fixed bottom-6 right-6 z-50 rounded-full bg-cyan-600 px-4 py-2 text-sm font-semibold text-white shadow-lg hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-300">
-        Install App
-    </button>
-   
-
     <!-- Initialize Select2 and handle Livewire updates -->
     <script>
         document.addEventListener('livewire:load', function () {

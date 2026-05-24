@@ -64,6 +64,11 @@ themeToggleBtn.addEventListener('click', function() {
 </script>
             </div>
             <div>
+              <button id="installAppButton" type="button" class="hidden rounded-lg bg-cyan-600 px-3 py-2 text-xs font-semibold text-white shadow hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-300">
+                Install App
+              </button>
+            </div>
+            <div>
               <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                 <span class="sr-only">Open user menu</span>
                 
